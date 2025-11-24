@@ -7,13 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 // page_url = https://www.jetbrains.com/
 public class MainPage {
+
+    @FindBy(xpath = "//button[contains(text(), 'Accept All')]")
+    public WebElement acceptCookiesButton;
+
     @FindBy(xpath = "//*[@data-test-marker='Developer Tools']")
     public WebElement seeDeveloperToolsButton;
 
-    @FindBy(xpath = "//*[@data-test='suggestion-action']")
+    @FindBy(xpath = "//*[@data-test='suggestion-link']") // alteração
     public WebElement findYourToolsButton;
 
-    @FindBy(xpath = "//div[@data-test='main-menu-item' and @data-test-marker = 'Developer Tools']")
+    @FindBy(xpath = "//*[contains(text(), 'Developer Tools') and contains(@class, 'mainMenuItem')]")
     public WebElement toolsMenu;
 
     @FindBy(css = "[data-test='site-header-search-action']")
@@ -22,4 +26,16 @@ public class MainPage {
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
+    public void acceptCookies() {
+        try {
+            if (acceptCookiesButton.isDisplayed()) { //verifica se o botão está visível antes de clicar
+                acceptCookiesButton.click();
+                System.out.println("Cookies aceites com sucesso.");
+            }
+        } catch (Exception e) {
+            System.out.println("O banner de cookies não apareceu ou já foi aceite.");
+        }
+    }
 }
+

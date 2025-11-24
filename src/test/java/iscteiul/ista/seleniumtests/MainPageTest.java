@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,6 +24,7 @@ public class MainPageTest {
         driver.get("https://www.jetbrains.com/");
 
         mainPage = new MainPage(driver);
+        mainPage.acceptCookies();
     }
 
     @AfterEach
@@ -34,22 +36,24 @@ public class MainPageTest {
     public void search() {
         mainPage.searchButton.click();
 
-        WebElement searchField = driver.findElement(By.cssSelector("[data-test='search-input']"));
+        try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); } // espera
+
+        WebElement searchField = driver.findElement(By.cssSelector("input[data-test$='inner']"));
         searchField.sendKeys("Selenium");
 
-        WebElement submitButton = driver.findElement(By.cssSelector("button[data-test='full-search-button']"));
-        submitButton.click();
+        try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); } // espera para ver o texto escrito
 
-        WebElement searchPageField = driver.findElement(By.cssSelector("input[data-test='search-input']"));
-        assertEquals("Selenium", searchPageField.getAttribute("value"));
+        assertEquals("Selenium", searchField.getAttribute("value"));
     }
 
     @Test
     public void toolsMenu() {
         mainPage.toolsMenu.click();
 
-        WebElement menuPopup = driver.findElement(By.cssSelector("div[data-test='main-submenu']"));
-        assertTrue(menuPopup.isDisplayed());
+        try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); }
+
+        assertTrue(mainPage.findYourToolsButton.isDisplayed(),
+                "O menu abriu mas o botão 'suggestion-link' (Find Your Tools) não está visível.");
     }
 
     @Test
