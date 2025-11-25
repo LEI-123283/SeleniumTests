@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-// page_url = https://www.jetbrains.com/
 public class MainPage {
 
     @FindBy(xpath = "//button[contains(text(), 'Accept All')]")
