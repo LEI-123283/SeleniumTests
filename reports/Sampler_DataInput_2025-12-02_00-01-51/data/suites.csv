@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5897","testDataInputInteraction()","","2025-12-02","passed","2025-12-02","","sampler_datainput.SamplerDataInputTest","sampler_datainput.SamplerDataInputTest","testDataInputInteraction"
